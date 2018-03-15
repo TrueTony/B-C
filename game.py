@@ -31,14 +31,23 @@ def input_number():
     return nums
 
 # сравнивает два сисла и сообщает кол-во быков и коров
-def check():
-    pass
+def check(nums, true_num):
+    bulls, cows = 0, 0
+    for i, num in enumerate(nums):
+        if num in true_num:
+            if nums[i] == true_num[i]:
+                bulls += 1
+            else:
+                cows += 1
+    return bulls, cows
 
 # удаляет неподходящие варианты из списка возможных
 def del_bad_answers():
     pass
 
-answers = get_all_answer()
-player = input_number()
-enemy = get_one_answer(answers)
+#answers = get_all_answer()
+#player = input_number()
+#enemy = get_one_answer(answers)
 
+a, b = check([1 ,2 ,3, 4], [2, 4, 6, 8])
+print(a, b)
