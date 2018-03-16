@@ -1,3 +1,5 @@
+#запилит ьчперез tkinter!!!
+
 import random
 
 # создаёт список всех возможных ответов
@@ -42,12 +44,41 @@ def check(nums, true_num):
     return bulls, cows
 
 # удаляет неподходящие варианты из списка возможных
-def del_bad_answers():
-    pass
+def del_bad_answers(ans, enemy_try, bull, cow):
+    for num in ans[:]:
+        temp_bull, temp_cow = check(num, enemy_try)
+        if temp_bull != bull and temp_bull != cow:
+            ans.remove(num)
+    return ans
 
-#answers = get_all_answer()
-#player = input_number()
-#enemy = get_one_answer(answers)
 
-a, b = check([1 ,2 ,3, 4], [2, 4, 6, 8])
-print(a, b)
+print('Игры Быки и Коровы')
+answers = get_all_answer()
+player = input_number()
+enemy = get_one_answer(answers)
+
+while True:
+    print('=' * 15, 'Ход игрока', '=' * 15)
+    print('Угадайте число компьютера')
+    number = input_number()
+    bulls, cows = check(number, enemy)
+    print('Быки {}, Коровы {}'.format(bulls, cows))
+    if bulls == 4:
+        print('Победил игрок!')
+        print('Компьютер загадал {}'.format(enemy))
+        break
+
+    print('=' * 15, 'Ход комьютера', '=' * 15)
+    enemy_try = get_one_answer(answers)
+    print('Компьютер считает, что вы загадали {}'.format(enemy_try))
+    bulls, cows = check(enemy_try, player)
+    print('Быки {}, Коровы {}'.format(bulls, cows))
+    if bulls == 4:
+        print('Победил компьютер!')
+        print('Компьютер загадал {}'.format(enemy))
+        break
+    else:
+        answers = del_bad_answers(answers, enemy_try, bulls, cows)
+
+#a, b = check([1 ,2 ,3, 4], [2, 4, 6, 8])
+#print(a, b)
