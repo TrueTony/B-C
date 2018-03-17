@@ -1,5 +1,6 @@
 import game_b_and_c
 
+
 answers = game_b_and_c.get_all_answers()
 counter = 0
 bulles = 0

@@ -3,7 +3,7 @@
 import random
 
 # создаёт список всех возможных ответов
-def get_all_answer():
+def get_all_answers():
     ans = []
     for i in range(10000):
         tmp = str(i).zfill(4)
@@ -54,7 +54,7 @@ def del_bad_answers(ans, enemy_try, bull, cow):
 
 if __name__ == '__main__':
     print('Игры Быки и Коровы')
-    answers = get_all_answer()
+    answers = get_all_answers()
     player = input_number()
     enemy = get_one_answer(answers)
 
