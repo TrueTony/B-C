@@ -1,6 +1,5 @@
-#запилит ьчперез tkinter!!!
-
 import random
+
 
 # создаёт список всех возможных ответов
 def get_all_answers():
@@ -8,9 +7,9 @@ def get_all_answers():
     for i in range(10000):
         tmp = str(i).zfill(4)
         # print(tmp)
-        #if len(set(map(int, tmp))) == 4:
+        # if len(set(map(int, tmp))) == 4:
         #    ans.append(list(map(int, tmp)))
-    #print(ans)
+    # print(ans)
         lst = ['x' for num in tmp if tmp.count(num) == 1]
         if len(lst) == 4:
             ans.append(list(map(int, tmp)))
