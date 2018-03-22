@@ -1,5 +1,5 @@
 from tkinter import *
-import logic_for_gui
+from logic_for_gui import *
 
 root = Tk()
 root.title('Игра')
