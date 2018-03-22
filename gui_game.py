@@ -1,24 +1,44 @@
 # сложность
 # время хода компьютера 1 сек.
+# сорц https://python-scripts.com/tkinter-introduction
+from PIL import *
 from tkinter import *
+from tkinter.ttk import Style
 
+ 
+class Example(Frame):
+    def __init__(self, parent):
+        Frame.__init__(self, parent, background="white")   
+        self.parent = parent
+        self.parent.title('Быки и Коровы')
+        self.pack(fill=BOTH, expand=1)
+        self.centerWindow()
+        self.initUI()
 
-root = Tk()
+    def centerWindow(self):
+        w = 650
+        h = 550
 
-top_frame = Frame()
-top_frame.pack()
+        sw = self.parent.winfo_screenwidth()
+        sh = self.parent.winfo_screenheight()
 
-bottom_frame = Frame(root)
-bottom_frame.pack(side=BOTTOM)
+        x = (sw - w)/2
+        y = (sh - h)/2
 
-button1 = Button(top_frame, text="Первая", fg="red")
-button2 = Button(top_frame, text="Вторая", fg="blue")
-button3 = Button(top_frame, text="Третья", fg="green")
-button4 = Button(bottom_frame, text="Четвёртая", fg="gray")
+        self.parent.geometry('%dx%d+%d+%d' % (w, h, x, y))
 
-button1.pack(side=LEFT)
-button2.pack(side=LEFT)
-button3.pack(side=LEFT)
-button4.pack(side=BOTTOM)
-
-root.mainloop()
+    def initUI(self):
+        #self.style = Style()
+        #self.style.theme_use('default')
+        #self.pack(fill=BOTH, expand=1)
+        quitButton = Button(self, text='Quit', command = self.quit)
+        quitButton.place(x=50, y=50)
+    
+        
+def main():
+    root = Tk()
+    app = Example(root)
+    root.mainloop()  
+ 
+if __name__ == '__main__':
+    main()
