@@ -18,17 +18,11 @@ def firscreen():
 
 
 def secondscreen():
-
-
     trig = 0
-    # запрашивает упольщователя неповторяющиеся цифры
-    
-
+    # запрашивает у пользователя неповторяющиеся цифры
     nums = entry.get()
     if len(set(nums)) == 4 and nums.isdigit():
-
         trig = 1
-        print('right')
     else:
         num_err.place(x=190, y=170)
     
@@ -48,10 +42,32 @@ def secondscreen():
         return nums
 
 def thirdscreen():
-    pass
+    while True:
+        output_user(1.0, '=' * 15, 'Ход игрока', '=' * 15)
+        output_user(1.0, 'Угадайте число компьютера')
+        number = input_number()
+        bulls, cows = check(number, enemy)
+        print('Быки {}, Коровы {}'.format(bulls, cows))
+        if bulls == 4:
+            print('Победил игрок!')
+            print('Компьютер загадал {}'.format(enemy))
+            break
+
+        print('=' * 15, 'Ход комьютера', '=' * 15)
+        enemy_try = get_one_answer(answers)
+        print('Компьютер считает, что вы загадали {}'.format(enemy_try))
+        bulls, cows = check(enemy_try, player)
+        print('Быки {}, Коровы {}'.format(bulls, cows))
+        if bulls == 4:
+            print('Победил компьютер!')
+            print('Компьютер загадал {}'.format(enemy))
+            break
+        else:
+            answers = del_bad_answers(answers, enemy_try, bulls, cows)
 
 def limit_sym(e):
     entry.delete('3', END)
+    try_entry.delete('3', END)
 
 #logic
 answers = logic_for_gui.get_all_answers()
@@ -79,6 +95,7 @@ turn = Label(fram, text='Ход NN', font=('Carambia, 20'))
 output_user = Text(fram, width=27, height=18)
 output_comp = Text(fram, width=27, height=18)
 try_entry = Entry(fram, font=('Cambria, 15'), width=10)
+try_entry.bind('<KeyPress>', limit_sym)
 btn_ok = Button(fram, text='ОК', font=('Cambria, 10'))
 btn_sur = Button(fram, text='Сдаться', font=('Cambria, 10'), width=25)
 
