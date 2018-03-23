@@ -30,9 +30,10 @@ def thirdscreen():
         trig = 1
         print('right')
     else:
-        print('wrong')
+        num_err.place(x=190, y=170)
     
     if trig == 1:
+        num_err.place_forget()
         entry.place_forget()
         bnt_input.place_forget()
 
@@ -67,12 +68,14 @@ btn_quit = Button(fram, width=10, text='Выход', font=('Cambria, 30'), comma
 btn_quit.place(x=270, y=400)
 
 # second screen
+num_err = Label(fram, text='Введите 4 неповторяющиеся цифры', font=('Carambia, 20'))
 entry = Entry(fram, width=10, font=('Cambria, 30'))
 entry.bind('<KeyPress>', limit_sym)
 bnt_input = Button(fram, width=10, text='Ввести', font=('Cambria, 30'), command=thirdscreen)
-turn = Label(fram, text='Ход NN', font=('Carambia, 20'))
+
 
 # third screen
+turn = Label(fram, text='Ход NN', font=('Carambia, 20'))
 output_user = Text(fram, width=27, height=18)
 output_comp = Text(fram, width=27, height=18)
 try_entry = Entry(fram, font=('Cambria, 15'), width=10)
