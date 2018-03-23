@@ -1,5 +1,5 @@
 from tkinter import *
-from logic_for_gui import *
+import logic_for_gui
 
 root = Tk()
 root.title('Игра')
@@ -18,16 +18,21 @@ def secondscreen():
 
 
 def thirdscreen():
-    number = entry.get()
-    print(number)
-    if number.isdigit() is False:
-        print('its not a number')
-        entry.delete('0', END)
-    else:
-        print('its a number!')
 
-    Anton = 0
-    if Anton == 1:
+
+    trig = 0
+    # запрашивает упольщователя неповторяющиеся цифры
+    
+
+    nums = entry.get()
+    if len(set(nums)) == 4 and nums.isdigit():
+
+        trig = 1
+        print('right')
+    else:
+        print('wrong')
+    
+    if trig == 1:
         entry.place_forget()
         bnt_input.place_forget()
 
@@ -38,6 +43,9 @@ def thirdscreen():
         btn_ok.place(x=325, y=540)
         btn_sur.place(x=420, y=540)
 
+        nums = list(map(int, nums))
+        return nums
+
 def foruthscreen():
     pass
 
@@ -46,9 +54,7 @@ def limit_sym(e):
 
 #logic
 answers = logic_for_gui.get_all_answers()
-player = logic_for_gui.input_number()
 enemy = logic_for_gui.get_one_answer(answers)
-
 
 # first screen
 title = Label(fram, font=('Cambria', 50), text='Быки и коровы')
