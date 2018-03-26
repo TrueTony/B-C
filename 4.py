@@ -152,5 +152,6 @@ try_entry = Entry(fram, font=('Cambria, 15'), width=10)
 try_entry.bind('<KeyPress>', limit_sym)
 btn_ok = Button(fram, text='ОК', font=('Cambria, 10'), command=main)
 btn_sur = Button(fram, text='Сдаться', font=('Cambria, 10'), width=25)
-
+if a != 0:
+    fourscreen()
 root.mainloop()
