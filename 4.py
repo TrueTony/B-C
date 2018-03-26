@@ -1,4 +1,4 @@
-from tkinter import *
+from tkinter import Frame, Label, Entry, Tk, Text, Button, END
 import logic_for_gui
 
 root = Tk()
@@ -40,11 +40,17 @@ def secondscreen():
 
         nums = list(map(int, nums))
         return nums
+        
+
+
 
 def thirdscreen():
-    while True:
-        output_user(1.0, '=' * 15, 'Ход игрока', '=' * 15)
-        output_user(1.0, 'Угадайте число компьютера')
+    #while True:   #убрал цикл пока что
+    if True:
+        output_user.insert(1.0, ('=' * 5, 'Ход игрока', '=' * 5))
+        output_user.insert(END, '\nУгадайте число компьютера')
+        output_user.insert(END, nums)
+        '''
         number = input_number()
         bulls, cows = check(number, enemy)
         print('Быки {}, Коровы {}'.format(bulls, cows))
@@ -64,6 +70,7 @@ def thirdscreen():
             break
         else:
             answers = del_bad_answers(answers, enemy_try, bulls, cows)
+        '''
 
 def limit_sym(e):
     entry.delete('3', END)
@@ -72,6 +79,9 @@ def limit_sym(e):
 #logic
 answers = logic_for_gui.get_all_answers()
 enemy = logic_for_gui.get_one_answer(answers)
+
+#начальный nums, числа загаданное пользователем
+nums = 0
 
 # first screen
 title = Label(fram, font=('Cambria', 50), text='Быки и коровы')
@@ -88,6 +98,9 @@ num_err = Label(fram, text='Введите 4 неповторяющиеся ци
 entry = Entry(fram, width=10, font=('Cambria, 30'))
 entry.bind('<KeyPress>', limit_sym)
 bnt_input = Button(fram, width=10, text='Ввести', font=('Cambria, 30'), command=secondscreen)
+print(nums)
+if nums != 0:
+    thirdscreen()
 
 
 # third screen
