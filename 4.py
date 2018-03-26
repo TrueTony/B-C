@@ -1,4 +1,4 @@
-from tkinter import Frame, Label, Entry, Tk, Text, Button, END
+from tkinter import Frame, Label, Entry, Tk, Text, Button, END, Toplevel
 import logic_for_gui
 
 root = Tk()
@@ -19,8 +19,8 @@ def firscreen():
 
 def secondscreen():
     # запрашивает у пользователя неповторяющиеся цифры
-    get_nums()
-    if nums != 0:
+    get_player()
+    if player != 0:
         num_err.place_forget()
         entry.place_forget()
         bnt_input.place_forget()
@@ -37,16 +37,15 @@ def secondscreen():
 
 
 def thirdscreen():
-    # while True:   #убрал цикл пока что
-    if True:
-        output_user.insert(1.0, ('=' * 5, 'Ход игрока', '=' * 5))
-        output_user.insert(END, '\nУгадайте число компьютера')
+    pass
 
-        
-            # break
-        '''
-        
-        '''
+def fourscreen():
+    win = Toplevel()
+    win = Label(text='the End')
+    win.pack
+    if True:
+        win.focus_force()
+        win.grab_set()
 
 
 def limit_sym(e):
@@ -54,66 +53,79 @@ def limit_sym(e):
     try_entry.delete('3', END)
 
 
-def get_nums():
-    global nums
+def get_player():
+    global player
     while True:
-        nums = entry.get()
-        if len(set(nums)) == 4 and nums.isdigit():
-            nums = list(map(int, nums))
-            print('nums before return', nums)
-            return nums
+        player = entry.get()
+        if len(set(player)) == 4 and player.isdigit():
+            player = list(map(int, player))
+            return player
         else:
             num_err.place(x=190, y=170)
-            nums = 0
-            return nums
+            player = 0
+            return player
 
 def player_turn():
-    print('start get numb2')
-    nums = try_entry.get()
-    print('nums', nums)
-    if len(set(nums)) == 4 and nums.isdigit():
-        num_err.place_forget()
-        nums = list(map(int, nums))
-        print('nums before bulls, cows', nums)
 
-        bulls, cows = logic_for_gui.check(nums, enemy)
+    number = try_entry.get()
+    if len(set(number)) == 4 and number.isdigit():
+        number = list(map(int, number))
+        num_err.place_forget()
+        turn.place(x=330, y=170)
+        output_user.insert(END, '\n===== Ход игрока =====')
+        output_user.insert(END, '\nУгадайте число компьютера')
+        txt = '\nИгрок предположил {}'.format(number)
+        output_user.insert(END, txt)
+        bulls, cows = logic_for_gui.check(number, enemy)
         txt = '\nБыки {}, Коровы {}'.format(bulls, cows)
         output_user.insert(END, txt)
         if bulls == 4:
-            print('Победил игрок!')
+            output_user.insert(END, '\nПобедил игрок!')
+            global a
+            a = 1
+            return a
         else:
-            return
-        print('Компьютер загадал {}'.format(enemy))
+            enemy_turn()
 
     else:
         turn.place_forget()
         num_err.place(x=190, y=170)
 
-    print(nums)
+    print(number)
 
 def enemy_turn():
-    print('=' * 15, 'Ход комьютера', '=' * 15)
-    enemy_try = get_one_answer(answers)
-    print('Компьютер считает, что вы загадали {}'.format(enemy_try))
-    bulls, cows = check(enemy_try, player)
-    print('Быки {}, Коровы {}'.format(bulls, cows))
+    global answers
+    print(len(answers))
+    output_comp.insert(END, '\n===== Ход комьютера =====')
+    enemy_try = logic_for_gui.get_one_answer(answers)
+    txt = '\nКомпьютер считает, что вы загадали {}'.format(enemy_try)
+    output_comp.insert(END, txt)
+    bulls, cows = logic_for_gui.check(enemy_try, player)
+    txt = '\nБыки {}, Коровы {}'.format(bulls, cows)
+    output_comp.insert(END, txt)
     if bulls == 4:
-        print('Победил компьютер!')
-        print('Компьютер загадал {}'.format(enemy))
-        break
+        output_comp.insert(END, '\nПобедил копьютер!')
+        txt = '\nКомпьютер загадал {}'.format(enemy)
+        global a
+        a = 1
+        return a
     else:
-        answers = del_bad_answers(answers, enemy_try, bulls, cows)
+        answers = logic_for_gui.del_bad_answers(answers, enemy_try, bulls, cows)
+        return
 
+def main():
+    if a == 0:
+        player_turn()
 
 
 # logic
 answers = logic_for_gui.get_all_answers()
 enemy = logic_for_gui.get_one_answer(answers)
+a = 0
+print('enemy', enemy)
 
-print(enemy)
-
-# начальный nums, числа загаданное пользователем
-nums = 0
+# начальный player, числа загаданное пользователем
+player = 0
 
 # first screen
 title = Label(fram, font=('Cambria', 50), text='Быки и коровы')
@@ -134,11 +146,11 @@ bnt_input = Button(fram, width=10, text='Ввести', font=('Cambria, 30'), co
 
 # third screen
 turn = Label(fram, text='Ход NN', font=('Carambia, 20'))
-output_user = Text(fram, width=27, height=18)
-output_comp = Text(fram, width=27, height=18)
+output_user = Text(fram, width=30, height=18)
+output_comp = Text(fram, width=30, height=18)
 try_entry = Entry(fram, font=('Cambria, 15'), width=10)
 try_entry.bind('<KeyPress>', limit_sym)
-btn_ok = Button(fram, text='ОК', font=('Cambria, 10'), command=player_turn)
+btn_ok = Button(fram, text='ОК', font=('Cambria, 10'), command=main)
 btn_sur = Button(fram, text='Сдаться', font=('Cambria, 10'), width=25)
 
 root.mainloop()
