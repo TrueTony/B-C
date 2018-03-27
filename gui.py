@@ -40,7 +40,7 @@ def thirdscreen():
     pass
 
 def fourscreen():
-    top = Toplevel()
+    top = Toplevel(width=300, height=200)
     msg = Message(top, text='Бла-ба-бла!')
     msg.pack()
 
@@ -110,12 +110,7 @@ def enemy_turn():
     if bulls == 4:
         output_comp.insert(END, '\nПобедил копьютер!')
         txt = '\nКомпьютер загадал {}'.format(enemy)
-        # global a, b
-        a = 1
-        b = 1
-        #юда добавить 4 экран
-
-        return a, b
+        fourscreen()
     else:
         answers = logic_for_gui.del_bad_answers(answers, enemy_try, bulls, cows)
         return
