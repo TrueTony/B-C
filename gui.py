@@ -63,6 +63,16 @@ def thirdscreen():
     btn_quit.pack()
 
 
+def surrender():
+    turn.place_forget()
+    output_user.place_forget()
+    output_comp.place_forget()
+    try_entry.place_forget()
+    btn_ok.place_forget()
+    btn_sur.place_forget()
+    firscreen()
+
+
 def limit_sym(e):
     entry.delete('3', END)
     try_entry.delete('3', END)
@@ -154,7 +164,7 @@ output_comp = Text(fram, width=30, height=18)
 try_entry = Entry(fram, font=('Cambria, 15'), width=10)
 try_entry.bind('<KeyPress>', limit_sym)
 btn_ok = Button(fram, text='ОК', font=('Cambria, 10'), command=player_turn)
-btn_sur = Button(fram, text='Сдаться', font=('Cambria, 10'), width=25)
+btn_sur = Button(fram, text='Сдаться', font=('Cambria, 10'), width=25, command=surrender)
 
 # fourth screen
 
