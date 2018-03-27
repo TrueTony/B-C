@@ -3,7 +3,6 @@ import logic_for_gui
 
 root = Tk()
 root.title('Игра')
-# root.minsize(800,600)
 
 fram = Frame(root, width=800, height=600)
 fram.pack()
@@ -37,15 +36,9 @@ def secondscreen():
         btn_ok.place(x=325, y=540)
         btn_sur.place(x=420, y=540)
 
-        # thirdscreen()
-
-
 
 def thirdscreen():
-    pass
-
-
-def fourscreen():
+    # запускает игру заново
     def retry():
         turn.place_forget()
         output_user.place_forget()
@@ -69,8 +62,6 @@ def fourscreen():
     btn_quit = Button(top, text='Выход', command=quit)
     btn_quit.pack()
 
-    
-
 
 def limit_sym(e):
     entry.delete('3', END)
@@ -89,8 +80,8 @@ def get_player():
             player = 0
             return player
 
-def player_turn():
 
+def player_turn():
     number = try_entry.get()
     if len(set(number)) == 4 and number.isdigit():
         number = list(map(int, number))
@@ -105,10 +96,9 @@ def player_turn():
         output_user.insert(END, txt)
         if bulls == 4:
             output_user.insert(END, '\nПобедил игрок!')
-            fourscreen()
+            thirdscreen()
         else:
             enemy_turn()
-
     else:
         turn.place_forget()
         num_err.place(x=190, y=170)
@@ -128,15 +118,16 @@ def enemy_turn():
     if bulls == 4:
         output_comp.insert(END, '\nПобедил копьютер!')
         txt = '\nКомпьютер загадал {}'.format(enemy)
-        fourscreen()
+        thirdscreen()
     else:
         answers = logic_for_gui.del_bad_answers(answers, enemy_try, bulls, cows)
         return
 
+
 def main():
     player_turn()
 
-# logic
+
 def logic():
     global answers, enemy
     answers = logic_for_gui.get_all_answers()
@@ -149,10 +140,8 @@ player = 0
 # first screen
 title = Label(fram, font=('Cambria', 50), text='Быки и коровы')
 title.place(x=190, y=70)
-
 btn_start = Button(fram, width=10, text='Начать', font=('Cambria, 30'), command=firscreen)
 btn_start.place(x=270, y=260)
-
 btn_quit = Button(fram, width=10, text='Выход', font=('Cambria, 30'), command=quit)
 btn_quit.place(x=270, y=400)
 
