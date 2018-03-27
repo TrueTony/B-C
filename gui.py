@@ -32,6 +32,7 @@ def secondscreen():
         output_comp.delete(1.0, END)
         output_user.place(x=140, y=230)
         output_comp.place(x=420, y=230)
+        try_entry.delete(0, END)
         try_entry.place(x=140, y=540)
         btn_ok.place(x=325, y=540)
         btn_sur.place(x=420, y=540)
