@@ -124,10 +124,6 @@ def enemy_turn():
         return
 
 
-def main():
-    player_turn()
-
-
 def logic():
     global answers, enemy
     answers = logic_for_gui.get_all_answers()
@@ -157,7 +153,7 @@ output_user = Text(fram, width=30, height=18)
 output_comp = Text(fram, width=30, height=18)
 try_entry = Entry(fram, font=('Cambria, 15'), width=10)
 try_entry.bind('<KeyPress>', limit_sym)
-btn_ok = Button(fram, text='ОК', font=('Cambria, 10'), command=main)
+btn_ok = Button(fram, text='ОК', font=('Cambria, 10'), command=player_turn)
 btn_sur = Button(fram, text='Сдаться', font=('Cambria, 10'), width=25)
 
 # fourth screen
