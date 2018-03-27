@@ -10,6 +10,7 @@ fram.pack()
 
 
 def firscreen():
+    logic()
     btn_quit.place_forget()
     btn_start.place_forget()
 
@@ -39,6 +40,7 @@ def secondscreen():
 def thirdscreen():
     pass
 
+
 def fourscreen():
     top = Toplevel(width=300, height=200)
     msg = Message(top, text='Бла-ба-бла!')
@@ -49,9 +51,8 @@ def fourscreen():
 
     btn_retry = Button(top, text='Повторить')
     btn_retry.pack()
-    btn_quit = Button(top, text='Выход')
+    btn_quit = Button(top, text='Выход', command=quit)
     btn_quit.pack()
-
 
 
 def limit_sym(e):
@@ -118,14 +119,13 @@ def enemy_turn():
 def main():
     player_turn()
 
-
-b = 0
-
 # logic
-answers = logic_for_gui.get_all_answers()
-enemy = logic_for_gui.get_one_answer(answers)
-a = 0
-print('enemy', enemy)
+def logic():
+    global answers, enemy
+    answers = logic_for_gui.get_all_answers()
+    enemy = logic_for_gui.get_one_answer(answers)
+    a = 0
+    print('enemy', enemy)
 
 # начальный player, числа загаданное пользователем
 player = 0
@@ -145,7 +145,6 @@ num_err = Label(fram, text='Введите 4 неповторяющиеся ци
 entry = Entry(fram, width=10, font=('Cambria, 30'))
 entry.bind('<KeyPress>', limit_sym)
 bnt_input = Button(fram, width=10, text='Ввести', font=('Cambria, 30'), command=secondscreen)
-
 
 # third screen
 turn = Label(fram, text='Ход NN', font=('Carambia, 20'))
