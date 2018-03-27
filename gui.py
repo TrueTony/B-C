@@ -1,4 +1,4 @@
-from tkinter import Frame, Label, Entry, Tk, Text, Button, END, Toplevel
+from tkinter import Frame, Label, Entry, Tk, Text, Button, END, Toplevel, Message
 import logic_for_gui
 
 root = Tk()
@@ -40,12 +40,18 @@ def thirdscreen():
     pass
 
 def fourscreen():
-    win = Toplevel()
-    win = Label(text='the End')
-    win.pack
-    if True:
-        win.focus_force()
-        win.grab_set()
+    top = Toplevel()
+    msg = Message(top, text='Бла-ба-бла!')
+    msg.pack()
+
+    top.focus_force()
+    top.grab_set()
+
+    btn_retry = Button(top, text='Повторить')
+    btn_retry.pack()
+    btn_quit = Button(top, text='Выход')
+    btn_quit.pack()
+
 
 
 def limit_sym(e):
@@ -81,9 +87,7 @@ def player_turn():
         output_user.insert(END, txt)
         if bulls == 4:
             output_user.insert(END, '\nПобедил игрок!')
-            global a
-            a = 1
-            return a
+            fourscreen()
         else:
             enemy_turn()
 
@@ -106,17 +110,21 @@ def enemy_turn():
     if bulls == 4:
         output_comp.insert(END, '\nПобедил копьютер!')
         txt = '\nКомпьютер загадал {}'.format(enemy)
-        global a
+        # global a, b
         a = 1
-        return a
+        b = 1
+        #юда добавить 4 экран
+
+        return a, b
     else:
         answers = logic_for_gui.del_bad_answers(answers, enemy_try, bulls, cows)
         return
 
 def main():
-    if a == 0:
-        player_turn()
+    player_turn()
 
+
+b = 0
 
 # logic
 answers = logic_for_gui.get_all_answers()
@@ -152,6 +160,9 @@ try_entry = Entry(fram, font=('Cambria, 15'), width=10)
 try_entry.bind('<KeyPress>', limit_sym)
 btn_ok = Button(fram, text='ОК', font=('Cambria, 10'), command=main)
 btn_sur = Button(fram, text='Сдаться', font=('Cambria, 10'), width=25)
-if a != 0:
-    fourscreen()
+
+# fourth screen
+
+
+
 root.mainloop()
