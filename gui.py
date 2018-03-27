@@ -143,6 +143,9 @@ def logic():
 # начальный player, числа загаданное пользователем
 player = 0
 
+# номер хода
+turn = 0
+
 # first screen
 title = Label(fram, font=('Cambria', 50), text='Быки и коровы')
 title.place(x=190, y=70)
@@ -165,9 +168,6 @@ try_entry = Entry(fram, font=('Cambria, 15'), width=10)
 try_entry.bind('<KeyPress>', limit_sym)
 btn_ok = Button(fram, text='ОК', font=('Cambria, 10'), command=player_turn)
 btn_sur = Button(fram, text='Сдаться', font=('Cambria, 10'), width=25, command=surrender)
-
-# fourth screen
-
 
 
 root.mainloop()
