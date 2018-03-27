@@ -14,6 +14,7 @@ def firscreen():
     btn_quit.place_forget()
     btn_start.place_forget()
 
+    entry.delete(0, END)
     entry.place(x=275, y=260)
     bnt_input.place(x=270, y=400)
 
@@ -27,6 +28,8 @@ def secondscreen():
         bnt_input.place_forget()
 
         turn.place(x=330, y=170)
+        output_user.delete(1.0, END)
+        output_comp.delete(1.0, END)
         output_user.place(x=140, y=230)
         output_comp.place(x=420, y=230)
         try_entry.place(x=140, y=540)
@@ -137,7 +140,6 @@ def logic():
     global answers, enemy
     answers = logic_for_gui.get_all_answers()
     enemy = logic_for_gui.get_one_answer(answers)
-    a = 0
     print('enemy', enemy)
 
 # начальный player, числа загаданное пользователем
