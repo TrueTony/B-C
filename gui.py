@@ -33,7 +33,7 @@ def secondscreen():
         btn_ok.place(x=325, y=540)
         btn_sur.place(x=420, y=540)
 
-        thirdscreen()
+        # thirdscreen()
 
 
 
@@ -42,6 +42,17 @@ def thirdscreen():
 
 
 def fourscreen():
+    def retry():
+        turn.place_forget()
+        output_user.place_forget()
+        output_comp.place_forget()
+        try_entry.place_forget()
+        btn_ok.place_forget()
+        btn_sur.place_forget()
+        firscreen()
+        top.destroy()
+
+
     top = Toplevel(width=300, height=200)
     msg = Message(top, text='Бла-ба-бла!')
     msg.pack()
@@ -49,10 +60,12 @@ def fourscreen():
     top.focus_force()
     top.grab_set()
 
-    btn_retry = Button(top, text='Повторить')
+    btn_retry = Button(top, text='Повторить', command=retry)
     btn_retry.pack()
     btn_quit = Button(top, text='Выход', command=quit)
     btn_quit.pack()
+
+    
 
 
 def limit_sym(e):
